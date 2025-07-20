@@ -1,4 +1,9 @@
-# src/langgraph_supplier_risk/utils/normalize.py
+def clamp_score(num, low=1, high=5):
+    try:
+        n = int(num)
+    except ValueError:
+        n = 1
+    return max(low, min(high, n))
+
 def normalize_score(score: int) -> float:
-    # Map 1–5 → 0.0–1.0
-    return round((score - 1) / 4, 3)
+    return round((clamp_score(score) - 1) / 4, 3)
